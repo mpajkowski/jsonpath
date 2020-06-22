@@ -1,6 +1,6 @@
-use serde_json::{Number, Value};
 use select::cmp::*;
-use select::{FilterKey, to_f64};
+use select::{to_f64, FilterKey};
+use serde_json::{Number, Value};
 
 #[derive(Debug, PartialEq)]
 pub(super) enum ExprTerm<'a> {
@@ -201,11 +201,10 @@ impl<'a> Into<ExprTerm<'a>> for &Vec<&'a Value> {
     }
 }
 
-
 #[cfg(test)]
 mod expr_term_inner_tests {
-    use serde_json::{Number, Value};
     use select::expr_term::ExprTerm;
+    use serde_json::{Number, Value};
 
     #[test]
     fn value_vec_into() {

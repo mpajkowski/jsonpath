@@ -222,6 +222,13 @@ pub fn selector<'a>(json: &'a Value) -> impl FnMut(&str) -> Result<Vec<&'a Value
     move |path: &str| selector.str_path(path)?.reset_value().select()
 }
 
+pub fn selector_owned(json: &Value) -> impl FnMut(&str) -> Result<Vec<Value>, JsonPathError> + '_ {
+    let mut selector = Selector::default();
+    let _ = selector.value(json);
+
+    move |path: &str| selector.str_path(path)?.reset_value().select_owned()
+}
+
 /// It is the same to `selector` function. but it deserialize the result as given type `T`.
 ///
 /// ```rust
