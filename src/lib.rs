@@ -312,6 +312,13 @@ pub fn select<'a>(json: &'a Value, path: &str) -> Result<Vec<&'a Value>, JsonPat
     Selector::default().str_path(path)?.value(json).select()
 }
 
+pub fn select_owned(json: &Value, path: &str) -> Result<Vec<Value>, JsonPathError> {
+    Selector::default()
+        .str_path(path)?
+        .value(json)
+        .select_owned()
+}
+
 /// It is the same to `select` function but it return the result as string.
 ///
 /// ```rust
